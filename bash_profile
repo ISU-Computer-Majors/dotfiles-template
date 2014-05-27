@@ -30,5 +30,42 @@ PATH=".:${PATH}"
 C_INCLUDE_PATH="${HOME}/include:${C_INCLUDE_PATH}"
 CPLUS_INCLUDE_PATH="${HOME}/include:${CPLUS_INCLUDE_PATH}"
 
+if [[ $(uname) =~ "CYGWIN*" ]]
+then
+  if [ -d "/cygdrive/c/Program Files/MiKTeX 2.9/miktex/bin/x64" ]; then
+    PATH="/cygdrive/c/Program Files/MiKTeX 2.9/miktex/bin/x64:${PATH}"
+  fi
+  startxwin
+  DISPLAY=localhost:0.0
+  export DISPLAY
+elif [[ $(uname) =~ "LINUX" ]]
+then
+    echo
+fi
 
-export USERNAME BASH_ENV PATH DISPLAY C_INCLUDE_PATH CPLUS_INCLUDE_PATH
+if [[ $(hostname) =~ "*iastate*" ]]
+then
+    #license
+    export LM_LICENSE_FILE=1717@io.ece.iastate.edu:27006@io.ece.iastate.edu:6978@io.ece.iastate.edu:27001@io.ece.iastate.edu
+    #Xilinx setup
+    #The below line can effect gcc. I am not sure of the details.
+    source /remote/Xilinx/14.6/settings64.sh
+    export PATH=$PATH:/remote/Modelsim/10.1c/modeltech/linux_x86_64/
+    #Makes the Xilinx place and route tool try a little harder.
+    #export XIL_PAR_ENABLE_LEGALIZER=1
+
+    #Convey setup
+    export PATH=$PATH:/opt/convey/bin
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/convey/lib
+    export CNY_PDK=/opt/convey/pdk
+    export CNY_PDK_REV=2012_03_19
+    export CNY_PDK_HDLSIM=Mentor
+    export CNY_PDK_SIMMODE=64
+    if [ -d "${HOME}/personalitites" ]; then
+        export CNY_PERSONALITY_PATH=$HOME/personalities:${CNY_PERSONALITY_PATH}
+    fi
+    export CNY_RUNTIME_STARTUP_DEBUG=0
+    export CNY_CALL_STATS=1
+fi
+
+export USERNAME BASH_ENV PATH DISPLAY C_INCLUDE_PATH CPLUS_INCLUDE_PATH LD_LIBRARY_PATH

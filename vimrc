@@ -1,15 +1,24 @@
 "This is an example vimrc file. This file is free to use, modify and distribute without charge. No warranty of any kind is provided with this file.
+"Have this line first. This breaks compatibility between vi and vim
 set nocompatible
 
-"set sw=4
-"set et
-"set ts=4
+"The rest of the settings are commented because a vimrc file should be your own. Blindly using someones vimrc is like letting your humanities major friend borrow your car.
+"The settings are roughly listed from most common to least common
+
+"These are the common settings to change:
+"set shiftwidth=4
+"set expandtab
+"set tabstop=4
 "set autoindent
 "set smartindent
 "syntax on
 "set backspace=2
 "set ruler
 "set mouse=a
+
+"numbering
+"set number
+
 "easy split navigation
 "nnoremap <C-h> <C-w>h
 "nnoremap <C-j> <C-w>j
@@ -19,8 +28,6 @@ set nocompatible
 " automatically reload vimrc when it's saved
 "au BufWritePost .vimrc so ~/.vimrc
 
-"numbering
-"set number
 
 "autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -33,22 +40,12 @@ set nocompatible
 "set pastetoggle=<F2>
 "set clipboard=unnamed
 
+"keeps section highlighted when doing section indenting
 "vnoremap < <gv
 "vnoremap > >gv
 
+"There's some philosophically reason why Y should yank and the same way D deletes.
 "map Y y$
 
-"imap <up> <c-o>gk
-"imap <down> <c-o>gj
-
-"get block cursor
-"let &t_ti.="\e[1 q"
-"let &t_SI.="\e[5 q"
-"let &t_EI.="\e[1 q"
-"let &t_te.="\e[0 q"
-
-"Clear search highlights
-"noremap <silent><Leader>/ :nohls<CR>
-
-"remapping esc
-"inoremap qq <Esc>
+"Remapping the esc key is a common practice as vim is about keeping your hands on the keyboard and the esc key is way in the corner. How to remap esc however causes more debate than a humanities major analyzing Hemmingway. Most commonly seen are remapping jk, using capslock and shift-space. Your mileage may vary with getting one of the last two working.
+"inoremap jk <Esc>
